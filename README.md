@@ -1,4 +1,4 @@
-# ST 2067-203a - _XML schema document_ 
+# ST 2117-1b - _JSON schema document_ 
 
 _This repository is public._ 
 
@@ -10,4 +10,6 @@ Issues should be reported at <https://github.com/SMPTE/st2067-203a/issues>. Alte
 
 ## Project details
 
-Element for ST 2067-203
+Element for ST 2117-1
+
+An informative JSON schema for the nonlinear coefficient data
