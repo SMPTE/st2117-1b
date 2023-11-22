@@ -6,7 +6,7 @@ Please consult [CONTRIBUTING.md](./CONTRIBUTING.md), [CONFIDENTIALITY.md](./CONF
 
 ## Reporting issues
 
-Issues should be reported at <(https://github.com/SMPTE/st2117-1b/issues)>. Alternatively, comments can be sent to 10e-chair@smpte.org.
+Issues should be reported at <https://github.com/SMPTE/st2117-1b/issues>. Alternatively, comments can be sent to 10e-chair@smpte.org.
 
 ## Project details
 
