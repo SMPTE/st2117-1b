@@ -1,0 +1,228 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/meta/core",
+    "$id": "http://smpte-ra.org/json-schemas/2117-1/2022/coef-schema",
+    "$comments": "Copyright (c), Society of Motion Pictures and Television Engineers. Licensed under BSD-3-Cl//spdx.org/licenses/BSD-3-Clause.html).",
+    "title": "SMPTE ST 2117-1 nonlinear coefficient validation schema",
+    "description": "For validating SMPTE ST 2117-1a coefficients.\nSubject to SMPTE Terms and conditions at http://smpte-ra.org",
+    "readOnly": true,
+    "writeOnly": false,
+    "definitions": {
+        "stringArray": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "uniqueItems": false,
+            "default": []
+        },
+        "stringArray2D": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/stringArray"
+            },
+            "uniqueItems": false,
+            "default": []
+        },
+        "stringArray3D": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/stringArray2D"
+            },
+            "uniqueItems": false,
+            "default": []
+        },
+        "stringArray4D": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/stringArray3D"
+            },
+            "uniqueItems": false,
+            "default": []
+        },
+        "conv_coefficients_1x1output": {
+            "$ref": "#/definitions/stringArray2D"
+        },
+        "conv_coefficients_4x4output": {
+            "$ref": "#/definitions/stringArray4D"
+        },
+        "deconv_coefficients_7x7output": {
+            "$ref": "#/definitions/stringArray3D"
+        },
+        "deconv_coefficients_9x9output": {
+            "$ref": "#/definitions/stringArray4D"
+        },
+        "reference": {
+            "type": "object",
+            "required": [
+                "ref_coefficients",
+                "ref_bias",
+                "crcReference"
+            ],
+            "properties": {
+                "ref_coefficients": {
+                    "$ref": "#/definitions/stringArray3D"
+                },
+                "ref_bias": {
+                    "type": "string"
+                },
+                "crcReference": {
+                    "type": "string"
+                }
+            }
+        },
+        "featureDeconvolution": {
+            "type": "object",
+            "required": [
+                "set_0"
+            ],
+            "properties": {
+                "set_0": {
+                    "type": "object",
+                    "properties": {
+                        "deconv_coefficients_9x9output": {
+                            "$ref": "#/definitions/stringArray4D"
+                        },
+                        "biases": {
+                            "$ref": "#/definitions/stringArray"
+                        },
+                        "crcReference": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "set_1": {
+                    "type": "object",
+                    "properties": {
+                        "deconv_coefficients_7x7output": {
+                            "$ref": "#/definitions/stringArray2D"
+                        },
+                        "biases": {
+                            "$ref": "#/definitions/stringArray"
+                        },
+                        "crcReference": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "crcFeatureDeconvolution": {
+                    "type": "string"
+                }
+            }
+        },
+        "set": {
+            "type": "object",
+            "required": [
+                "biases",
+                "alpha"
+            ],
+            "anyOf": [{
+                    "$ref": "#/definitions/conv_coefficients_1x1output"
+                },
+                {
+                    "ref": "#/definitions/conv_coefficients_4x4output"
+                },
+                {
+                    "ref": "#/definitions/deconv_coefficients_7x7output"
+                },
+                {
+                    "ref": "#/definitions/deconv_coefficients_9x9output"
+                }
+            ],
+            "properties": {
+                "biases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "uniqueItems": true,
+                    "default": []
+                },
+                "alpha": {
+                    "type": "string"
+                }
+            }
+        },
+        "sets": {
+            "type": "object",
+            "required": [
+                "set_0",
+                "set_1",
+                "set_2",
+                "set_3",
+                "set_4",
+                "set_5",
+                "crcSets"
+            ],
+            "properties": {
+                "set_0": {
+                    "$ref": "#/definitions/set"
+                },
+                "set_1": {
+                    "$ref": "#/definitions/set"
+                },
+                "set_2": {
+                    "$ref": "#/definitions/set"
+                },
+                "set_3": {
+                    "$ref": "#/definitions/set"
+                },
+                "set_4": {
+                    "$ref": "#/definitions/set"
+                },
+                "set_5": {
+                    "$ref": "#/definitions/set"
+                },
+                "crcSets": {
+                    "type": "string"
+                }
+            }
+        },
+        "upsampler": {
+            "type": "object",
+            "required": [
+                "sets",
+                "reference"
+            ],
+            "properties": {
+                "sets": {
+                    "$ref": "#/definitions/sets"
+                },
+                "reference": {
+                    "$ref": "#/definitions/reference"
+                },
+                "featureDeconvolution": {
+                    "$ref": "#/definitions/featureDeconvolution"
+                }
+            }
+        }
+    },
+    "type": "object",
+    "required": [
+        "upsampler_0",
+        "upsampler_1",
+        "upsampler_2",
+        "upsampler_3",
+        "upsampler_4",
+        "upsampler_5"
+    ],
+    "properties": {
+        "upsampler_0": {
+            "$ref": "#/definitions/upsampler"
+        },
+        "upsampler_1": {
+            "$ref": "#/definitions/upsampler"
+        },
+        "upsampler_2": {
+            "$ref": "#/definitions/upsampler"
+        },
+        "upsampler_3": {
+            "$ref": "#/definitions/upsampler"
+        },
+        "upsampler_4": {
+            "$ref": "#/definitions/upsampler"
+        },
+        "upsampler_5": {
+            "$ref": "#/definitions/upsampler"
+        }
+    }
+}
